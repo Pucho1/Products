@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import NavBar from './NavBar';
+import NavBar from "./NavBar";
 
 // const Layout = ({children} : { children: React.ReactNode }) => {
   const Layout = () => {
@@ -10,7 +10,7 @@ import NavBar from './NavBar';
         <NavBar />
       </header>
 
-      <main className='flex flex-col items-center justify-center min-h-screen bg-gray-100'> 
+      <main className='max-w-7xl mx-auto py-6 px-4 pt-20' > 
         <Outlet />
       </main>
     </>

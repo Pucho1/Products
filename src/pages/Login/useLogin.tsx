@@ -5,7 +5,7 @@ import { useAuthStore } from '../../context/AuthContext';
 const useLogin = ( email: string, password: string ) => {
 
 	const navegate = useNavigate();
-  const authStore = useAuthStore();
+  	const authStore = useAuthStore();
 
 	const authSuccess = ( token: string ) => {
 		if (token === '') return;
