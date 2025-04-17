@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     document.cookie = `token=${accessToken}; expires=${now.toUTCString()};path=/;`;
     sessionStorage.setItem('accessToken', accessToken.token!);
 
-    console.log('en la cookies tengo el token', document.cookie);
+    // console.log('en la cookies tengo el token', document.cookie);
 
     login(accessToken);
   };

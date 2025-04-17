@@ -25,9 +25,6 @@ const useLogin = ( email: string, password: string ) => {
 		.catch(err => {
 				console.error('Error:', err.response ? err.response.data : err.message);
 		});
-
-		// Handle login logic here
-		console.log('Login attempt with:', { email, password });
 	};
 
 

@@ -8,9 +8,6 @@ function App() {
 
   const isAuntenticated = useAuthStore().isAuthenticated;
 
-  console.log('isAuntenticated', isAuntenticated);
-  
-
   return (
     // <Login />
 
