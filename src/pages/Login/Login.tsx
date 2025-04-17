@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { Lock, Mail, ArrowRight } from 'lucide-react';
+
+import useLogin from './useLogin';
 
 const  Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Handle login logic here
-    console.log('Login attempt with:', { email, password });
-    
-  };
+  const { handleSubmit } = useLogin(email, password);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 space-y-8">
         <div className="text-center">
           <Lock className="w-12 h-12 text-indigo-600 mx-auto" />
@@ -33,6 +31,8 @@ const  Login = () => {
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Correo Electrónico
               </label>
+
+              {/* CORREO */}
               <div className="mt-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail className="h-5 w-5 text-gray-400" />
@@ -40,7 +40,7 @@ const  Login = () => {
                 <input
                   id="email"
                   name="email"
-                  type="email"
+                  // type="email"
                   autoComplete="email"
                   required
                   value={email}
@@ -51,6 +51,7 @@ const  Login = () => {
               </div>
             </div>
 
+            {/* CONTRASEÑA */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Contraseña
@@ -74,6 +75,7 @@ const  Login = () => {
             </div>
           </div>
 
+          {/* Recordarme y Olvidaste tu contraseña */}
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
@@ -114,6 +116,6 @@ const  Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
