@@ -11,13 +11,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
 
 
   return (
-    <div 
+    <div
       className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform hover:scale-105"
       onClick={onClick}
     >
-      <img 
-        src={product.image} 
-        alt={product.title} 
+      <img
+        src={product.image}
+        alt={product.title}
         className="w-full h-48 object-cover"
       />
       <div className="p-4">
@@ -27,7 +27,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
           <span className="text-2xl font-bold text-blue-600">
             ${product.price.toFixed(2)}
           </span>
-          <button 
+          <button
             className="flex items-center text-blue-600 hover:text-blue-800"
             onClick={onClick}
           >

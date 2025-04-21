@@ -3,9 +3,6 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { LoginResponse } from '../interfaces/loginResponse';
 import { ContextDta } from '../interfaces/contextData';
 
-// import { getCookies } from '../api/api';
-
-
 export const defaultContextValue: LoginResponse = {
   token: null,
 };
@@ -18,7 +15,7 @@ export const AuthContext = createContext<any>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [useReg, setUserReg] = useState<loginResponse>(defaultContextValue);
+  const [useReg, setUserReg] = useState<LoginResponse>(defaultContextValue);
 	
   // Laizy initialization of isAuthenticated state
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>( 
@@ -68,15 +65,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
    * @param accessToken Ojeto que contiene el token de acceso
    * @returns setea el token en las cookies y en el sessionStorage
    */
-  const setToken = async (accessToken: loginResponse) => {
+  const setToken = async (accessToken: LoginResponse) => {
     const now = new Date();
     const minutos = 12 * 60;
     now.setTime(now.getTime() + minutos);
 
     document.cookie = `token=${accessToken}; expires=${now.toUTCString()};path=/;`;
     sessionStorage.setItem('accessToken', accessToken.token!);
-
-    // console.log('en la cookies tengo el token', document.cookie);
 
     login(accessToken);
   };
@@ -86,14 +81,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setIsAuthenticated(false);
   };
 
-  const login = ( tokentValue: loginResponse ) => {
+  const login = ( tokentValue: LoginResponse ) => {
     setUserReg(tokentValue);
     setIsAuthenticated(true);
   };
 
 
   const valueContext: ContextDta = {
-		token: useReg.token,
+		token: useReg,
     logout,
     setToken,
     isAuthenticated,
