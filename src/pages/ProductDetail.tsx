@@ -2,11 +2,6 @@ import { ArrowLeft, Package } from 'lucide-react';
 import { useLocation } from 'react-router';
 import { Product } from '../interfaces/product';
 
-// interface ProductDetailProps {
-//   product: Product;
-//   onBack: () => void;
-// }
-
 const ProductDetail = () => {
 
   const location = useLocation();
