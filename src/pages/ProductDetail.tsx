@@ -1,23 +1,30 @@
 import { ArrowLeft, Package } from 'lucide-react';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
+
 import { Product } from '../interfaces/product';
+import { useTranslation } from 'react-i18next';
 
 const ProductDetail = () => {
 
+  const { t } = useTranslation();
+
   const location = useLocation();
+  const navigate = useNavigate();
   const product = location.state?.product as Product || {};
 
-  console.log('ProductDetail', useLocation(), location);
+  const onBack = (): void => { navigate('/products-list') };
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <button
-        // onClick={onBack}
+        onClick={onBack}
         className="flex items-center text-blue-600 hover:text-blue-800 mb-6"
       >
         <ArrowLeft className="mr-2 h-5 w-5" />
-        Volver a productos
+        {t('GO_BACK_PRODUCTS')}
       </button>
+
+      <h1></h1>
       
       <div className="grid md:grid-cols-2 gap-8">
         <div>
