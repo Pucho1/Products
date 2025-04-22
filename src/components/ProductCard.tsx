@@ -18,9 +18,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
       <img
         src={product.image}
         alt={product.title}
-        className="w-full h-48 object-cover"
+        className="w-full h-48 md:50 object-cover"
       />
-      <div className="p-4 h-1/2 flex-col flex justify-between">
+      <div className="p-4 h-50 flex-col flex justify-between">
         <h3 className="text-xl font-semibold text-gray-800 multiline-ellipsis">{product.title}</h3>
         <p className="text-gray-600 mt-1">{product.category}</p>
         <div className="mt-4 flex justify-between items-center">

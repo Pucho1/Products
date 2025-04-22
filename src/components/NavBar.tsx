@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { Menu, X, LogOut, User, ShoppingCart } from 'lucide-react';
 
 import { useAuthStore } from '../context/AuthContext';
+import CustomSwitch from './CustomSwitch';
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const authStore = useAuthStore();
-  const navigate = useNavigate();
+  const navigate  = useNavigate();
+  const { t }  = useTranslation();
 
   const logOut = () => { authStore.logout() };
   const toggleMenu = () => { setIsMenuOpen(!isMenuOpen) };
@@ -33,6 +37,7 @@ const Navbar = () => {
 
           {/* User actions - visible on all screens */}
           <div className="flex items-center space-x-4">
+            
             {/* Shopping Cart */}
             <button 
               className="text-gray-600 hover:text-gray-900"
@@ -51,12 +56,14 @@ const Navbar = () => {
               <User className="h-6 w-6" />
             </button>
 
+           <CustomSwitch/>
+
             {/* Logout button - hidden on mobile, shown on tablet/desktop */}
             <button
               className="hidden sm:flex items-center space-x-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors"
               onClick={logOut}
             >
-              <span>Salir</span>
+              <span>{t('LOGOUT')}</span>
               <LogOut className="h-5 w-5" />
             </button>
             
