@@ -2,5 +2,15 @@
   "welcome": "Welcome!",
   "description": "This is an example",
   "LOGOUT": "LogOut",
-  "GO_BACK_PRODUCTS": "Go back Prooducts"
+  "GO_BACK_PRODUCTS": "Go back Prooducts",
+  "PROFILE": "profile",
+  "LAST_UPDATED": "Last updated",
+  "USER_ID": "User ID",
+  "NAME": "Name",
+  "USER_NAME": "Username",
+  "EMAIL": "Email",
+  "EMAIL_ADDRES":  "Email Address",
+  "PASSWORD": "Password",
+  "SIGN_IN": "Sing in",
+  "ACOUNT_OVERVIEW": "Account Overview"
 }

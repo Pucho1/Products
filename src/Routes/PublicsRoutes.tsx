@@ -5,8 +5,7 @@ import { useAuthStore } from "../context/AuthContext";
 
 const PublicRoute = () => {
 
-   const isAuntenticated = useAuthStore().isAuthenticated;
- 
+  const isAuntenticated = useAuthStore().isAuthenticated;
 
   return !isAuntenticated 
     ? <Outlet />

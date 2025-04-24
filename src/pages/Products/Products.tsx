@@ -13,7 +13,7 @@ const Products = () => {
 	useProducts(setProductList);
 
 	const goDetail = (product: Product) => {
-		navigate(`/products-list/${product.id}`, { state: { product } });
+		navigate(`/product/${product.id}`, { state: { product } });
 	};
  
 	return (

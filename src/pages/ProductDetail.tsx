@@ -3,8 +3,11 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { Product } from '../interfaces/product';
 import { useTranslation } from 'react-i18next';
+import useStore from '../store/useZTanDStore';
 
 const ProductDetail = () => {
+
+  const { addProoduct } = useStore();
 
   const { t } = useTranslation();
 
@@ -57,7 +60,9 @@ const ProductDetail = () => {
             </span>
           </div>
           
-          <button className="mt-8 w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+          <button 
+            onClick={() => addProoduct(product)}
+            className="mt-8 w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
             Añadir al carrito
           </button>
         </div>
