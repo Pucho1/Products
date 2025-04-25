@@ -19,7 +19,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	
   // Laizy initialization of isAuthenticated state
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>( 
-    () => sessionStorage.getItem('accessToken') !== null
+    () => 
+      sessionStorage.getItem('accessToken') !== null 
+      && sessionStorage.getItem('accessToken') !== undefined
+      && sessionStorage.getItem('accessToken') !== ''
   );
 
 
@@ -41,7 +44,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 
 /**
- * * @description escucha si se ha getionado el tokent desde otras pestannas
+ * * @description escucha si se ha gestionado el tokent desde otras pestannas
  */
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
@@ -79,6 +82,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = () => {
     setUserReg(defaultContextValue);
     setIsAuthenticated(false);
+    sessionStorage.setItem('accessToken', '');
   };
 
   const login = ( tokentValue: LoginResponse ) => {
