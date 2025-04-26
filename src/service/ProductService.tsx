@@ -1,11 +1,11 @@
 import { AxiosResponse } from "axios";
 import axs from "../api/axiosCustom";
-import { Product } from "../interfaces/product";
+import { ProductListResponse } from "../interfaces/product";
 
 const ProductService = () => {
 
-  const getProductsList = (): Promise<AxiosResponse<Product[]>> => {
-    return axs.get<Product[]>(`/products`);
+  const getProductsList = (): Promise<AxiosResponse<ProductListResponse>> => {
+    return axs.get<ProductListResponse>(`/products`);
   };
 
   return { getProductsList };

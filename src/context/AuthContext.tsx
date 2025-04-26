@@ -11,8 +11,6 @@ export const defaultContextValue: LoginResponse = {
 export const AuthContext = createContext<any>(null);
 
 
-
-
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [useReg, setUserReg] = useState<LoginResponse>(defaultContextValue);
@@ -20,7 +18,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // Laizy initialization of isAuthenticated state
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>( 
     () => 
-      sessionStorage.getItem('accessToken') !== null 
+      sessionStorage.getItem('accessToken') !== null
       && sessionStorage.getItem('accessToken') !== undefined
       && sessionStorage.getItem('accessToken') !== ''
   );

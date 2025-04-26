@@ -20,7 +20,7 @@ const useLogin = ( email: string, password: string ) => {
 
 		AuthService().login(email, password)
 		.then(res => {
-				authSuccess(res.data.token ?? '');
+				authSuccess(res.data.accessToken ?? '');
 		})
 		.catch(err => {
 				console.error('Error:', err.response ? err.response.data : err.message);

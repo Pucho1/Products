@@ -4,5 +4,12 @@ export interface Product {
     price      : number,
     description: string,
     category   : string,
-    image      : string,
+    images      : string[],
+};
+
+export interface ProductListResponse {
+    products: Product[];
+    total   : number;
+    skip    : number;
+    limit   : number;
 };

@@ -22,8 +22,8 @@ const CardShopCar: React.FC<CarCardProps> = ({product, onRemove, }) => {
       {/* Image and Marca u otra cosa por definir */}
       <div className="relative w-48 h-32 flex-shrink-0">
         <img 
-          src={product.image} 
-          alt={`${product.price} ${product.title}`} 
+          src={product.images[0]}
+          alt={`${product.price} ${product.title}`}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
         <div className="absolute top-2 right-2 bg-slate-800 text-white px-2 py-1 text-xs rounded-full">

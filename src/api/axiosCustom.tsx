@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const axs = axios.create({
   // baseURL: import.meta.env.VITE_EXTERNAL_APP_ax,
-  baseURL: 'https://fakestoreapi.com/',
+  baseURL: 'https://dummyjson.com/',
   withCredentials: false,
   headers: {
     'Content-Type': 'application/json',

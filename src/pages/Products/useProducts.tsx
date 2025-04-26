@@ -8,7 +8,7 @@ const useProducts = ( setProductList: any) => {
 	useEffect(() => {
 		ProductService().getProductsList()
 			.then((response) => {
-				setProductList(response.data);
+				setProductList(response.data.products);
 			})
 			.catch((error) => {
 				console.error("Error fetching products:", error);
