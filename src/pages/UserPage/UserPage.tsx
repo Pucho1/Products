@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { User, Eye, EyeOff, Mail, Key, AtSign } from 'lucide-react';
 
-import Loading from '../../components/Loading';
+// import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import useUserPage from './useUserPage';
 import { useTranslation } from 'react-i18next';
@@ -12,13 +12,13 @@ const UserPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { t }  = useTranslation();
  
-  const { isLoading, error, userData } = useUserPage();
+  const { userData } = useUserPage();
 
-  if (isLoading)  return ( <Loading /> );
+  // if (isLoading)  return ( <Loading /> );
 
-  if (error) return ( <Error /> );
+  // if (error) return ( <Error /> );
 
-  if (!userData) return null;
+  if (!userData) return (<Error />);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 p-4 sm:p-6 lg:p-12">

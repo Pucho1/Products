@@ -4,11 +4,6 @@ import { LoginResponse } from '../interfaces/loginResponse';
 import { ContextDta } from '../interfaces/contextData';
 import { UserData } from '../interfaces/userInterface';
 
-export const defaultContextValue: LoginResponse = {
-  userData: null,
-  accessToken: null,
-};
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const AuthContext = createContext<any>(null);
 
@@ -78,21 +73,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     sessionStorage.setItem('accessToken', accessToken);
   };
 
-  const logout = () => {
+  const logout = (): void => {
     setUserReg(null);
     setIsAuthenticated(false);
     sessionStorage.setItem('accessToken', '');
   };
 
-  const login = ( loginData: LoginResponse ) => {
+  const login = ( loginData: LoginResponse ): void => {
     if (loginData.accessToken === null) return;
-    if (loginData.userData === null) return;
 
-    setUserReg(loginData.userData!);
-    setToken(loginData.accessToken!);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { accessToken, refreshToken, ...rest } = loginData;
+    setUserReg(rest);
+    setToken(accessToken);
     setIsAuthenticated(true);
   };
-
 
   const valueContext: ContextDta = {
 		token: sessionStorage.getItem('accessToken'),

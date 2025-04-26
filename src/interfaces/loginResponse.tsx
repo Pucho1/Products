@@ -1,6 +1,6 @@
 import { UserData } from "./userInterface";
 
-export interface LoginResponse {
-    userData: UserData  | null;
+export interface LoginResponse extends UserData {
     accessToken: string | null;
+    refreshToken: string | null;
 };

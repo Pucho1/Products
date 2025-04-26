@@ -1,23 +1,32 @@
-import useSWR from "swr";
+// import useSWR from "swr";
 
-import { UserData } from "../../interfaces/userInterface";
-import UserService from "../../service/UserService";
+import { useAuthStore } from "../../context/AuthContext";
 
-const fetcher = async ( id: string): Promise<UserData> =>  {
-	const response = await UserService().getUser(id);
-	return response.data;
-};
+// import { UserData } from "../../interfaces/userInterface";
+// import UserService from "../../service/UserService";
+
+// const fetcher = async ( id: string): Promise<UserData> =>  {
+// 	const response = await UserService().getUser(id);
+// 	return response.data;
+// };
 
 const useUserPage = () => {
-	const { data: userData, error, isLoading } = useSWR<UserData>(
-		'1',
-		fetcher
-	);
+
+	const authStore = useAuthStore();
+	
+	// const { data: userData, error, isLoading } = useSWR<UserData>(
+	// 	'1',
+	// 	fetcher
+	// );
+
+	console.log('userData', authStore.userData);
+
+
 
   return {
-		userData,
-		error,
-		isLoading,
+		userData: authStore.userData
+		// error,
+		// isLoading,
   };
 };
 
