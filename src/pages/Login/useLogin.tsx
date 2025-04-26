@@ -1,16 +1,17 @@
 import { useNavigate } from 'react-router';
 import AuthService from '../../service/AuthService';
 import { useAuthStore } from '../../context/AuthContext';
+import { LoginResponse } from '../../interfaces/loginResponse';
 
 const useLogin = ( email: string, password: string ) => {
 
 	const navegate = useNavigate();
   	const authStore = useAuthStore();
 
-	const authSuccess = ( token: string ) => {
-		if (token === '') return;
+	const authSuccess = ( loginResponse: LoginResponse ) => {
+		if (loginResponse.accessToken === '') return;
 
-		authStore?.setToken(token);
+		authStore?.login(loginResponse);
 
 		navegate("/products-list");
 	};
@@ -20,7 +21,7 @@ const useLogin = ( email: string, password: string ) => {
 
 		AuthService().login(email, password)
 		.then(res => {
-				authSuccess(res.data.accessToken ?? '');
+				authSuccess(res.data ?? '');
 		})
 		.catch(err => {
 				console.error('Error:', err.response ? err.response.data : err.message);

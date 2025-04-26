@@ -1,8 +1,10 @@
 import { LoginResponse } from "./loginResponse";
+import { UserData } from "./userInterface";
 
 export interface ContextDta {
-    token: LoginResponse,
+    token: string | null,
+    userData: UserData | null,
     logout: () => void,
-    setToken: (accessToken: LoginResponse) => void,
+    login: (loginData: LoginResponse) => void,
     isAuthenticated: boolean,
 };

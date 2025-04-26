@@ -1,3 +1,6 @@
+import { UserData } from "./userInterface";
+
 export interface LoginResponse {
-    token: string | null;
+    userData: UserData  | null;
+    accessToken: string | null;
 };

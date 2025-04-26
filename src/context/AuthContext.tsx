@@ -2,9 +2,11 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { LoginResponse } from '../interfaces/loginResponse';
 import { ContextDta } from '../interfaces/contextData';
+import { UserData } from '../interfaces/userInterface';
 
 export const defaultContextValue: LoginResponse = {
-  token: null,
+  userData: null,
+  accessToken: null,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +15,7 @@ export const AuthContext = createContext<any>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [useReg, setUserReg] = useState<LoginResponse>(defaultContextValue);
+  const [useReg, setUserReg] = useState<UserData |  null>(null);
 	
   // Laizy initialization of isAuthenticated state
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>( 
@@ -50,7 +52,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const token = event.newValue;
   
         if (token) {
-          login({ token });
+          // login({ token });
+          // tendria que obtener el usuariuo desde el backend para setearlo en el context
         } else  logout() 
       }
     };
@@ -66,33 +69,36 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
    * @param accessToken Ojeto que contiene el token de acceso
    * @returns setea el token en las cookies y en el sessionStorage
    */
-  const setToken = async (accessToken: LoginResponse) => {
+  const setToken = async (accessToken: string): Promise<void>  => {
     const now = new Date();
     const minutos = 12 * 60;
     now.setTime(now.getTime() + minutos);
 
     document.cookie = `token=${accessToken}; expires=${now.toUTCString()};path=/;`;
-    sessionStorage.setItem('accessToken', accessToken.token!);
-
-    login(accessToken);
+    sessionStorage.setItem('accessToken', accessToken);
   };
 
   const logout = () => {
-    setUserReg(defaultContextValue);
+    setUserReg(null);
     setIsAuthenticated(false);
     sessionStorage.setItem('accessToken', '');
   };
 
-  const login = ( tokentValue: LoginResponse ) => {
-    setUserReg(tokentValue);
+  const login = ( loginData: LoginResponse ) => {
+    if (loginData.accessToken === null) return;
+    if (loginData.userData === null) return;
+
+    setUserReg(loginData.userData!);
+    setToken(loginData.accessToken!);
     setIsAuthenticated(true);
   };
 
 
   const valueContext: ContextDta = {
-		token: useReg,
+		token: sessionStorage.getItem('accessToken'),
+    userData: useReg,
     logout,
-    setToken,
+    login,
     isAuthenticated,
   };
 
