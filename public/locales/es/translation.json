@@ -2,7 +2,7 @@
   "welcome": "Bienbenido!",
   "description": "This is an example",
   "LOGOUT": "Salir",
-  "GO_BACK_PRODUCTS": "Volver a productos",
+  "GO_BACK": "Volver atras",
   "PROFILE": "perfil",
   "LAST_UPDATED": "Ultima entrada",
   "USER_ID": "ID del usuario",
@@ -12,5 +12,7 @@
   "EMAIL_ADDRES":  "Correo electronico",
   "PASSWORD": "Contraseña",
   "SIGN_IN": "Iniciar sesión",
-  "ACOUNT_OVERVIEW": "Resumen de la cuenta"
+  "ACOUNT_OVERVIEW": "Resumen de la cuenta",
+  "FULL_NAME": "Nombre",
+  "GENDER": "Genero"
 }

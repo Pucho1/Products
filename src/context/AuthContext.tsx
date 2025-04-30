@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState, useContext, useEffect } from 'react';
+
 import { LoginResponse } from '../interfaces/loginResponse';
 import { ContextDta } from '../interfaces/contextData';
 import { UserData } from '../interfaces/userInterface';
@@ -8,18 +9,14 @@ import { UserData } from '../interfaces/userInterface';
 export const AuthContext = createContext<any>(null);
 
 
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [useReg, setUserReg] = useState<UserData |  null>(null);
 	
-  // Laizy initialization of isAuthenticated state
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>( 
-    () => 
-      sessionStorage.getItem('accessToken') !== null
-      && sessionStorage.getItem('accessToken') !== undefined
-      && sessionStorage.getItem('accessToken') !== ''
+    () => Boolean(sessionStorage.getItem('accessToken'))
   );
-
 
 //  function getCookie(cname: string) {
 //     const name = `${cname}=`;
@@ -42,6 +39,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
  * * @description escucha si se ha gestionado el tokent desde otras pestannas
  */
   useEffect(() => {
+
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === 'accessToken') {
         const token = event.newValue;
@@ -74,9 +72,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = (): void => {
-    setUserReg(null);
     setIsAuthenticated(false);
-    sessionStorage.setItem('accessToken', '');
+    sessionStorage.removeItem('accessToken');
   };
 
   const login = ( loginData: LoginResponse ): void => {

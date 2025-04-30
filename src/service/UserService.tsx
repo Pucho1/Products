@@ -4,8 +4,19 @@ import { UserData } from "../interfaces/userInterface";
 
 const UserService = () => {
 
-  const getUser = (id: string): Promise<AxiosResponse<UserData>> => {
-    return axs.get<UserData>(`/users/${id}`);
+  /**
+   * Fetches the user data from the server.
+   * @returns {Promise<AxiosResponse<UserData>>} A promise that resolves to the user data.
+   */
+  const getUser = (): Promise<AxiosResponse<UserData>> => {
+    
+    const accessToken = sessionStorage.getItem("accessToken");
+
+    return axs.get<UserData>(`/auth/me`, {
+      headers: {
+        Authorization: `Bearer ${ accessToken }`,
+      },
+    });
   };
   
   return { getUser };

@@ -1,32 +1,30 @@
-// import useSWR from "swr";
-
+import useSWR from "swr";
 import { useAuthStore } from "../../context/AuthContext";
+import UserService from "../../service/UserService";
+import { UserData } from "../../interfaces/userInterface";
 
-// import { UserData } from "../../interfaces/userInterface";
-// import UserService from "../../service/UserService";
 
-// const fetcher = async ( id: string): Promise<UserData> =>  {
-// 	const response = await UserService().getUser(id);
-// 	return response.data;
-// };
+const fetcher = async (): Promise<UserData> =>  {
+	const response = await UserService().getUser();
+	return response.data;
+};
 
 const useUserPage = () => {
-
 	const authStore = useAuthStore();
-	
-	// const { data: userData, error, isLoading } = useSWR<UserData>(
-	// 	'1',
-	// 	fetcher
-	// );
 
+	
+	const { data: userData, error, isLoading } = useSWR<UserData>(
+
+		( authStore.isAuthenticated && !authStore.userData ) ? '/auth/me' : null,
+		fetcher
+	);
+	
 	console.log('userData', authStore.userData);
 
-
-
   return {
-		userData: authStore.userData
-		// error,
-		// isLoading,
+		userData: authStore.userData || userData,
+		isLoading,
+		error,
   };
 };
 

@@ -7,7 +7,7 @@ import useStore from '../store/useZTanDStore';
 
 const ProductDetail = () => {
 
-  const { addProoduct } = useStore();
+  const { addProduct } = useStore();
 
   const { t } = useTranslation();
 
@@ -15,16 +15,16 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const product = location.state?.product as Product || {};
 
-  const onBack = (): void => { navigate('/products-list') };
+  const goBack = (): void => { navigate(-1) };
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <button
-        onClick={onBack}
+        onClick={goBack}
         className="flex items-center text-blue-600 hover:text-blue-800 mb-6"
       >
         <ArrowLeft className="mr-2 h-5 w-5" />
-        {t('GO_BACK_PRODUCTS')}
+        {t('GO_BACK')}
       </button>
 
       <h1></h1>
@@ -61,7 +61,7 @@ const ProductDetail = () => {
           </div>
           
           <button 
-            onClick={() => addProoduct(product)}
+            onClick={() => addProduct(product)}
             className="mt-8 w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
             Añadir al carrito
           </button>

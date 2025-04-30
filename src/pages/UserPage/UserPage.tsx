@@ -1,22 +1,22 @@
 
-import React, { useState } from 'react';
-import { User, Eye, EyeOff, Mail, Key, AtSign } from 'lucide-react';
+import React from 'react';
+import { User, Mail,  AtSign, VenusAndMars, UserCircle  } from 'lucide-react';
 
-// import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import useUserPage from './useUserPage';
 import { useTranslation } from 'react-i18next';
+import Loading from '../../components/Loading';
 
 const UserPage: React.FC = () => {
 
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
   const { t }  = useTranslation();
  
-  const { userData } = useUserPage();
+  const { userData, isLoading, error } = useUserPage();
 
-  // if (isLoading)  return ( <Loading /> );
+  if (isLoading)  return ( <Loading /> );
 
-  // if (error) return ( <Error /> );
+  if (error) return ( <Error /> );
 
   if (!userData) return (<Error />);
 
@@ -40,10 +40,23 @@ const UserPage: React.FC = () => {
 
         {/* User Details */}
         <div className="space-y-6">
+
+          {/* User ID */}
           <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-xl p-5 shadow-sm">
             <div className="flex justify-between items-center">
               <span className="text-sm text-purple-600 font-semibold">{t('USER_ID')}</span>
               <span className="text-lg font-bold text-purple-800">#{userData.id}</span>
+            </div>
+          </div>
+
+          {/* Full name */}
+          <div>
+            <label className="flex items-center text-sm font-medium text-gray-600 mb-1">
+              <UserCircle className="h-4 w-4 mr-2 text-purple-500" />
+              {t('FULL_NAME')}
+            </label>
+            <div className="bg-white rounded-lg px-4 py-3 shadow-sm text-gray-800">
+              {userData.firstName} {userData.lastName}
             </div>
           </div>
 
@@ -69,8 +82,21 @@ const UserPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Password */}
+          
+
+          {/* GENDER */}
           <div>
+            <label className="flex items-center text-sm font-medium text-gray-600 mb-1">
+              <VenusAndMars  className="h-4 w-4 mr-2 text-purple-500" />
+              {t('GENDER')}
+            </label>
+            <div className="bg-white rounded-lg px-4 py-3 shadow-sm text-gray-800">
+              {userData.gender}
+            </div>
+          </div>
+
+          {/* Password */}
+          {/* <div>
             <label className="flex items-center text-sm font-medium text-gray-600 mb-1">
               <Key className="h-4 w-4 mr-2 text-purple-500" />
               {t('PASSWORD')}
@@ -88,7 +114,7 @@ const UserPage: React.FC = () => {
                 )}
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

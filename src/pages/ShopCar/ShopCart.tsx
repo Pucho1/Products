@@ -1,13 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { Store } from 'lucide-react';
 
 import useStore from '../../store/useZTanDStore';
 import CarProductShopCar from '../../components/CardProductShopCar';
 import { Product } from '../../interfaces/product';
-import { useNavigate } from 'react-router';
 
 const CarShop: React.FC = () => {
-  const { productCarShop, deleteProductByID } = useStore();
+  const { cartProducts , deleteProductByID } = useStore();
 
   const navigate  = useNavigate();
   
@@ -24,7 +24,7 @@ const CarShop: React.FC = () => {
         </div>
       </header>
 
-      {productCarShop.length === 0
+      {cartProducts .length === 0
         ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <Store size={48} className="text-slate-300 mb-4" />
@@ -42,7 +42,7 @@ const CarShop: React.FC = () => {
           </div>
         ) : (
           <div className="flex flex-col gap-4">
-            {productCarShop.map((car: Product) => (
+            {cartProducts .map((car: Product) => (
               <div key={car.id} className="animate-fadeIn">
                 <CarProductShopCar
                   product={car}

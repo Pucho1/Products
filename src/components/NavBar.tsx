@@ -12,12 +12,12 @@ import useStore from '../store/useZTanDStore';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const authStore = useAuthStore();
-  const navigate  = useNavigate();
-  const { t }  = useTranslation();
-  const { productCarShop } = useStore();
+  const authStore          = useAuthStore();
+  const navigate           = useNavigate();
+  const { t }              = useTranslation();
+  const { cartProducts  } = useStore();
 
-  const logOut = () => { authStore.logout() };
+  const logOut     = () => { authStore.logout() };
   const toggleMenu = () => { setIsMenuOpen(!isMenuOpen) };
 
   return (
@@ -48,7 +48,7 @@ const Navbar = () => {
             >
               <ShoppingCart className="h-6 w-6" />
               <span className="text-sm font-medium ml-1">
-                {productCarShop.length ? `${productCarShop.length}` : ' '}
+                {cartProducts .length ? `${cartProducts .length}` : ' '}
               </span>
             </button>
 
