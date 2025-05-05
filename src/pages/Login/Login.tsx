@@ -18,7 +18,7 @@ const  Login = () => {
         <div className="text-center">
           <Lock className="w-12 h-12 text-indigo-600 mx-auto" />
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Iniciar Sesión
+          Hola señora Ines como esta 
           </h2>
           <p className="mt-2 text-sm text-gray-600">
             Ingresa tus credenciales para acceder
@@ -53,7 +53,7 @@ const  Login = () => {
             {/* CONTRASEÑA */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Contraseña
+                Hola señora Ines como esta 
               </label>
               <div className="mt-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
