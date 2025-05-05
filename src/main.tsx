@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { injectSpeedInsights } from '@vercel/speed-insights';
 
 import './assets/i18n.ts';
 import './index.css'
@@ -13,3 +14,5 @@ createRoot(document.getElementById('root')!).render(
       </AuthProvider>
   </StrictMode>,
 )
+
+injectSpeedInsights()
