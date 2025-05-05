@@ -1,7 +1,8 @@
 import useSWR from "swr";
-import { useAuthStore } from "../../context/AuthContext";
+
 import UserService from "../../service/UserService";
 import { UserData } from "../../interfaces/userInterface";
+import { useAuthStore } from "../../store/authZustandStore";
 
 
 const fetcher = async (): Promise<UserData> =>  {
@@ -10,19 +11,18 @@ const fetcher = async (): Promise<UserData> =>  {
 };
 
 const useUserPage = () => {
-	const authStore = useAuthStore();
+	const { isAuthenticated, useReg } = useAuthStore.getState();
+
 
 	
 	const { data: userData, error, isLoading } = useSWR<UserData>(
 
-		( authStore.isAuthenticated && !authStore.userData ) ? '/auth/me' : null,
+		( isAuthenticated && !useReg ) ? '/auth/me' : null,
 		fetcher
 	);
 	
-	console.log('userData', authStore.userData);
-
   return {
-		userData: authStore.userData || userData,
+		userData: useReg || userData,
 		isLoading,
 		error,
   };

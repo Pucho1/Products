@@ -1,13 +1,13 @@
-import { useAuthStore } from '../context/AuthContext';
+// import { useAuthStore } from '../context/AuthContext';
 import { Navigate, Outlet } from 'react-router';
+import { useAuthStore } from '../store/authZustandStore';
 
 const PrivateRoutes = () => {
-    const isAuntenticated = useAuthStore().isAuthenticated;
+  const isAuntenticated = useAuthStore((state) => state.isAuthenticated);
+  
+  console.log('isAuntenticated', isAuntenticated);
 
-    console.log('isAuntenticated', isAuntenticated);
- 
-
-  return isAuntenticated 
+  return isAuntenticated
     ? <Outlet />
     : <Navigate to="/login" replace />;
 };

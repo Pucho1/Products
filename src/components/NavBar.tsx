@@ -4,21 +4,21 @@ import { useTranslation } from 'react-i18next';
 
 import { Menu, X, LogOut, User, ShoppingCart } from 'lucide-react';
 
-import { useAuthStore } from '../context/AuthContext';
+// import { useAuthStore } from '../context/AuthContext';
 import CustomSwitch from './CustomSwitch';
 import useStore from '../store/useZTanDStore';
+import { useAuthStore } from '../store/authZustandStore';
 
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const authStore          = useAuthStore();
   const navigate           = useNavigate();
   const { t }              = useTranslation();
-  const { cartProducts  } = useStore();
+  const { cartProducts  }  = useStore();
 
-  const logOut     = () => { authStore.logout() };
-  const toggleMenu = () => { setIsMenuOpen(!isMenuOpen) };
+  const logOut     = () =>  useAuthStore.getState().logout() ;
+  const toggleMenu = () =>  setIsMenuOpen(!isMenuOpen) ;
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">

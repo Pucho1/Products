@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
           {
             path: "/user",
             lazy: async () => {
-              const { default: UserPage } = await import("../pages/UserPage/userPage");
+              const { default: UserPage } = await import("../pages/UserPage/UserPage");
               return { Component: UserPage };
             },
           },

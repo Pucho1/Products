@@ -10,13 +10,9 @@ const UserService = () => {
    */
   const getUser = (): Promise<AxiosResponse<UserData>> => {
     
-    const accessToken = sessionStorage.getItem("accessToken");
+    // const accessToken = sessionStorage.getItem("accessToken");
 
-    return axs.get<UserData>(`/auth/me`, {
-      headers: {
-        Authorization: `Bearer ${ accessToken }`,
-      },
-    });
+    return axs.get<UserData>(`/auth/me`);
   };
   
   return { getUser };

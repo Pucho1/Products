@@ -5,6 +5,7 @@ import ProductService from "../../service/ProductService";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useProducts = ( setProductList: any) => {
 
+	
 	useEffect(() => {
 		ProductService().getProductsList()
 			.then((response) => {

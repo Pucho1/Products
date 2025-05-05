@@ -9,7 +9,7 @@ const  Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { handleSubmit } = useLogin(email, password);
+  const { handleSubmit } = useLogin();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -25,7 +25,7 @@ const  Login = () => {
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={ (e) => handleSubmit(e , email, password) }>
           <div className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -40,7 +40,6 @@ const  Login = () => {
                 <input
                   id="email"
                   name="email"
-                  // type="email"
                   autoComplete="email"
                   required
                   value={email}

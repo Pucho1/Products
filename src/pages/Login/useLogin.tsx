@@ -1,38 +1,39 @@
 import { useNavigate } from 'react-router';
-import AuthService from '../../service/AuthService';
-import { useAuthStore } from '../../context/AuthContext';
-import { LoginResponse } from '../../interfaces/loginResponse';
 
-const useLogin = ( email: string, password: string ) => {
+import AuthService from '../../service/AuthService';
+import { LoginResponse } from '../../interfaces/loginResponse';
+import { useAuthStore } from '../../store/authZustandStore';
+
+const useLogin = () => {
 
 	const navegate = useNavigate();
-  	const authStore = useAuthStore();
+  	// const authStore = useAuthStore();
+	// const setAccessToken = useTokenStore((s) => s.setAccessToken);
 
 	const authSuccess = ( loginResponse: LoginResponse ) => {
-		if (loginResponse.accessToken === '') return;
 
-		authStore?.login(loginResponse);
-
+		useAuthStore.getState().login(loginResponse);
 		navegate("/products-list");
 	};
 	
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = (e: React.FormEvent, email: string, password: string) => {
 		e.preventDefault();
 
-		AuthService().login(email, password)
-		.then(res => {
+		AuthService()
+			.login(email, password)
+			.then(res => {
+				if (res.status !== 200) {
+					throw new Error('Error en la respuesta del servidor');
+				}
 				authSuccess(res.data ?? '');
-		})
-		.catch(err => {
+				// setAccessToken(res.data.accessToken);
+			})
+			.catch(err => {
 				console.error('Error:', err.response ? err.response.data : err.message);
-		});
+			});
 	};
 
-
-  return { 
-		
-		handleSubmit,
-	};
+  return { handleSubmit };
 };
 
 export default useLogin;

@@ -9,10 +9,6 @@ export interface Product {
     brand	: string;
 };
 
-// export interface ProductListShpopCar extends Product {
-//     quantity: number,
-// };
-
 export interface ProductListResponse {
     products: Product[];
     total   : number;

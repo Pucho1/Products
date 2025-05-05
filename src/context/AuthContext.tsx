@@ -14,14 +14,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [useReg, setUserReg] = useState<UserData |  null>(null);
 	
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>( 
-    () => Boolean(sessionStorage.getItem('accessToken'))
+  const [ accessToken, setAccessToken ] = useState<string  | null>( null );
+
+  const [isRefreshToken, setIsRefreshToken] = useState<boolean>(
+    Boolean( sessionStorage.getItem('refreshToken') ) 
   );
 
+
 //  function getCookie(cname: string) {
+
 //     const name = `${cname}=`;
+
 //     const decodedCookie = decodeURIComponent(document.cookie);
+
 //     const ca = decodedCookie.split(';');
+
 //     for (let i = 0; i < ca.length; i += 1) {
 //       let c = ca[i];
 //       while (c.charAt(0) === ' ') {
@@ -62,36 +69,39 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
    * @param accessToken Ojeto que contiene el token de acceso
    * @returns setea el token en las cookies y en el sessionStorage
    */
-  const setToken = async (accessToken: string): Promise<void>  => {
-    const now = new Date();
-    const minutos = 12 * 60;
-    now.setTime(now.getTime() + minutos);
+  const setToken = async (refreshToken: string, accessToken: string ): Promise<void>  => {
+    // const now = new Date();
+    // const minutos = 12 * 60;
+    // now.setTime(now.getTime() + minutos);
+    // document.cookie = `token=${accessToken}; expires=${now.toUTCString()};path=/;`;
 
-    document.cookie = `token=${accessToken}; expires=${now.toUTCString()};path=/;`;
-    sessionStorage.setItem('accessToken', accessToken);
+    sessionStorage.setItem('accessToken', accessToken) 
+    sessionStorage.setItem('refreshToken', refreshToken);
+    setAccessToken(accessToken);
   };
 
   const logout = (): void => {
-    setIsAuthenticated(false);
+    setIsRefreshToken(false);
+    sessionStorage.removeItem('refreshToken');
     sessionStorage.removeItem('accessToken');
   };
 
   const login = ( loginData: LoginResponse ): void => {
     if (loginData.accessToken === null) return;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { accessToken, refreshToken, ...rest } = loginData;
+
     setUserReg(rest);
-    setToken(accessToken);
-    setIsAuthenticated(true);
+    setToken( refreshToken, accessToken );
+    setIsRefreshToken(true);
   };
 
   const valueContext: ContextDta = {
-		token: sessionStorage.getItem('accessToken'),
+		token: accessToken,
     userData: useReg,
     logout,
     login,
-    isAuthenticated,
+    isAuthenticated: isRefreshToken,
   };
 
   return (
